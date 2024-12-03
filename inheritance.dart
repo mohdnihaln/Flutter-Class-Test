@@ -12,12 +12,12 @@ print("School ID: ${School.schoolID}"); // Accessing schoolID
 
   teacher.attendance( isPresent: true, userId: "456789", dayType: "Full Day", name: "Ajas");
   teacher.viewSyllabus(registrationID: "789456");
-  teacher.salary(salary: 50000);
+  teacher.salary(salary: "");
 
   Staff staff = Staff();
 
   staff.attendance( isPresent: true, userId: "258741", dayType: "Full Day", name: "Francis");
-  staff.salary(salary: 20000);
+  staff.salary(salary: "20000");
   
 }
 
@@ -30,7 +30,7 @@ class School {
 
   void payFees({required int amount}) {}
 
-  void salary({required int salary}) {}
+  void salary({required String salary}) {}
 }
 
 // Student Management
@@ -40,6 +40,8 @@ class Student extends School {
   }) {
     if (isPresent) {
       print("Student $name is Present");
+    }else{
+      print("Student is Absent");
     }
   }
 
@@ -47,7 +49,9 @@ class Student extends School {
   void viewSyllabus({required String registrationID}) {
   if (registrationID.isNotEmpty) {
     print("Student with ID $registrationID can view the syllabus");
-  }
+  }else{
+      print("Student can't view the syllabus");
+    }
   }
   void payFees({required int amount}) {
    print("Student has paid the amount of $amount");
@@ -57,8 +61,10 @@ class Student extends School {
 class Teacher extends School {
   @override
   void attendance({ required bool isPresent, required String userId, required String dayType, required String name }) {
-    if (isPresent) {
+    if (name.isNotEmpty) {
       print("Teacher $name is Present");
+    }else{
+      print("Teacher is Absent");
     }
   }
 
@@ -66,26 +72,37 @@ class Teacher extends School {
   void viewSyllabus({required String registrationID}) {
   if (registrationID.isNotEmpty) {
     print("Teacher with ID $registrationID can view the syllabus");
-  }
+  }else{
+      print("Teacher can't view the syllabus");
+    }
   }
   @override
-  void salary({required int salary}) {
+  void salary({required String salary}) {
+    if (salary.isNotEmpty){
     print("Teacher salary $salary is processed");
-  }
+  }else{
+      print("Teacher salary is not processed");
+    }
 }
-
+}
 
 // Staff Management
 class Staff extends School {
   @override
   void attendance({ required bool isPresent, required String userId, required String dayType, required String name }) {
-    if (isPresent) {
+    if (name.isNotEmpty) {
       print("Staff $name is Present");
+    }else{
+      print("Staff is Absent");
     }
   }
 
   @override
-  void salary({required int salary}) {
+  void salary({required String salary}) {
+    if (salary.isNotEmpty){
     print("Staff salary $salary is processed");
-  }
+  }else{
+      print("Teacher salary is not processed");
+    }
+}
 }
